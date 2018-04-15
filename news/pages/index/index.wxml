@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab == item.flag ? 'on':''}}" wx:for="{{ barTitle }}" wx:key="id" data-current='{{item.flag}}' bindtap='swichNav'>{{ item.text}}</view>
+</view>
+<scroll-view scroll-y>
+<!--第一条数据  -->
+  <view class="hot-news">
+    <image class="hot-news-image" src="{{firsthotImg}}"></image>
+    <view class="hot-news-info">
+      <view class="hot-news-title">{{ firstTitle }}</view>
+      <view class="news-source">
+        <text class="news-source-area {{firstSource == '' ? 'm-r-0':'m-r-20'}}">{{ firstSource }}</text>
+        <text class="news-time">{{ firstDate }}</text>
+      </view>
+    </view>
+  </view>
+  <!--左文右图  -->
+  <navigator wx:for="{{ newsList }}" url="/pages/detail/detail?id={{ item.id }}" >
+     <view class="news-list">
+        <view class="news-list-info">
+          <view class="news-list-title">{{item.title}}</view>
+          <view class="news-source">
+        <text class="news-source-area {{item.source == '' ? 'm-r-0':'m-r-20'}}">{{ item.source }}</text>
+        <text class="news-time">{{ item.date }}</text>
+      </view>
+        </view>
+         <view class="news-list-thumb">
+          <image class="news-list-img" src="{{item.firstImage}}"></image>
+        </view>
+     </view>
+  </navigator>
+</scroll-view>
