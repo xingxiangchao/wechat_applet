@@ -29,7 +29,7 @@ const tabTitle = [{
 }, {
   id: 6,
   text: '其他',
-  flag: 'qt'
+  flag: 'other'
 }];
 Page({
   data: {
@@ -39,11 +39,31 @@ Page({
     firstTitle: '',
     firstSource: '',
     firstDate: '',
+    firstId:'',
     newsList: ''
   },
   onLoad() {
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#3798d6'
+    });
     this.getNewsList();
   },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  // onPullDownRefresh () {
+  //   this.getNewsList(() => {
+  //     wx.stopPullDownRefresh()
+  //   })
+  // },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  // onReachBottom () {
+  //   this.getNewsList();
+  // },
   swichNav(e) {
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -75,6 +95,7 @@ Page({
   },
   setFirstNews(result) {
     this.setData({
+      firstId: result.id,
       firsthotImg: result.firstImage,
       firstTitle: result.title,
       firstSource: result.source,

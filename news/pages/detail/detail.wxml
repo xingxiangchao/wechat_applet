@@ -1,2 +1,18 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<view class="news-info" scroll-y>
+  <view class="news-title">{{ title }}</view>
+  <view class="news-remarks">
+    <text class="news-source {{source == ''? 'm-r-0':'m-r-20'}}">{{source}}</text>
+    <text class="news-date">{{date}}</text>
+    <text class="pull-right">阅读 {{ readCount }}</text>
+  </view>
+  <view wx:for="{{ content }}" wx:key="id" class="news-text">
+    <view wx:if="{{item.type == 'strong' }}" class="news-strong">{{item.text}}</view>
+    <view wx:if="{{item.type == 'p' }}" class="news-p">
+      <text>{{item.text}}</text>
+    </view>
+    <view wx:if="{{item.type == 'image' }}" class="news-img-con">
+      <image class="news-img" src="{{item.src}}"></image>
+    </view>
+  </view>
+</view>

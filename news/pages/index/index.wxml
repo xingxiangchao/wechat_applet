@@ -4,6 +4,7 @@
 </view>
 <scroll-view scroll-y>
 <!--第一条数据  -->
+<navigator url="/pages/detail/detail?id={{ firstId }}">
   <view class="hot-news">
     <image class="hot-news-image" src="{{firsthotImg}}"></image>
     <view class="hot-news-info">
@@ -14,8 +15,9 @@
       </view>
     </view>
   </view>
+  </navigator>
   <!--左文右图  -->
-  <navigator wx:for="{{ newsList }}" url="/pages/detail/detail?id={{ item.id }}" >
+  <navigator wx:for="{{ newsList }}" url="/pages/detail/detail?id={{ item.id }}" wx:key="id" >
      <view class="news-list">
         <view class="news-list-info">
           <view class="news-list-title">{{item.title}}</view>
