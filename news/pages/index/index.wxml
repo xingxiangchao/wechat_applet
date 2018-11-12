@@ -28,7 +28,7 @@
       </view>
         </view>
          <view class="news-list-thumb">
-          <image class="news-list-img" src="{{item.firstImage}}"></image>
+          <image class="news-list-img" src="{{item.firstImage}}" mode="aspectFill"></image>
         </view>
      </view>
   </navigator>

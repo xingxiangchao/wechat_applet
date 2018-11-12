@@ -80,6 +80,9 @@ Page({
     }
   },
   getNewsList(callback) {
+    wx.showLoading({
+      title: "加载中"
+    });
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
       data: {
@@ -101,7 +104,8 @@ Page({
         this.setNodata();
       },
       complete: () => {
-        callback && callback()
+        wx.hideLoading();
+        typeof callback === 'function' && callback();
       }
     })
   },
