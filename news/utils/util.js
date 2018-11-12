@@ -14,6 +14,12 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const def = {
+  defaultImage: '../../images/def.png',
+  defaultMessage: '暂无相关数据'
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  def: def
 }

@@ -1,11 +1,16 @@
 // pages/detail/detail.js
+// 引入公共文件
+const util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: ''
+    id: '',
+    defaultImage: util.def.defaultImage,
+    message: '暂无相关数据',
+    noData: true
   },
 
   /**
@@ -37,7 +42,14 @@ Page({
       },
       success: (res) => {
         let result = res.data.result;
-        this.setNewsInfo(result);
+        if (Object.keys(result).length === 0) {
+          this.setNodata();
+        } else {
+          this.setNewsInfo(result);
+        }
+      },
+      fail: (res) => {
+        this.setNodata();
       },
       complete: () => {
         callback && callback()
@@ -53,5 +65,10 @@ Page({
       readCount: result.readCount,
       content: result.content
     })
+  },
+  setNodata() {
+    this.setData({
+      noData: false
+    });
   }
 })

@@ -1,4 +1,6 @@
 //index.js
+// 引入公共文件
+const util = require('../../utils/util.js');
 //获取应用实例
 const app = getApp()
 
@@ -40,7 +42,10 @@ Page({
     firstSource: '',
     firstDate: '',
     firstId:'',
-    newsList: ''
+    newsList: '',
+    newsListShow: true,
+    defaultImage: util.def.defaultImage,
+    message: '暂无相关数据'
   },
   onLoad() {
     wx.setNavigationBarColor({
@@ -52,11 +57,11 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  // onPullDownRefresh () {
-  //   this.getNewsList(() => {
-  //     wx.stopPullDownRefresh()
-  //   })
-  // },
+  onPullDownRefresh () {
+    this.getNewsList(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
 
   /**
    * 页面上拉触底事件的处理函数
@@ -85,8 +90,15 @@ Page({
       },
       success: (res) => {
         let result = res.data.result;
+        if (!result.length) {
+          this.setNodata();
+          return;
+        }
         this.setFirstNews(result[0]);
         this.setNewsList(result);
+      },
+      fail: (res) => {
+        this.setNodata();
       },
       complete: () => {
         callback && callback()
@@ -96,7 +108,7 @@ Page({
   setFirstNews(result) {
     this.setData({
       firstId: result.id,
-      firsthotImg: result.firstImage,
+      firsthotImg: result.firstImage || this.data.defaultImage,
       firstTitle: result.title,
       firstSource: result.source,
       firstDate: result.date.substring(11, 16)
@@ -110,11 +122,16 @@ Page({
         title: result[i].title,
         source: result[i].source,
         date: result[i].date.substring(11, 16),
-        firstImage: result[i].firstImage
+        firstImage: result[i].firstImage || this.data.defaultImage
       });
       this.setData({
         newsList: list
       });
     }
   },
+  setNodata(){
+    this.setData({
+      newsListShow: false
+    });
+  }
 })

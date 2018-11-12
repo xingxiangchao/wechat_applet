@@ -5,6 +5,9 @@
   text-align: center;
   line-height: 90rpx;
   background: #3798d6;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .swiper-tab-list {
@@ -29,6 +32,10 @@
   transform: scale(0.5);
   transform-origin: left top;
   border-bottom: 8rpx solid #a2ceeb;
+}
+
+.swiper-content {
+  margin-top: 90rpx;
 }
 
 .hot-news {
@@ -105,4 +112,10 @@
 .news-list-img {
   width: 200rpx;
   height: 160rpx;
+}
+
+.no-data {
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  text-align: center;
 }

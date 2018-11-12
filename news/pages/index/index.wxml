@@ -2,8 +2,9 @@
 <view class="swiper-tab">
   <view class="swiper-tab-list {{currentTab == item.flag ? 'on':''}}" wx:for="{{ barTitle }}" wx:key="id" data-current='{{item.flag}}' bindtap='swichNav'>{{ item.text}}</view>
 </view>
-<scroll-view scroll-y>
-<!--第一条数据  -->
+<scroll-view class="swiper-content" scroll-y>
+  <block wx:if="{{ newsListShow }}">
+    <!--第一条数据  -->
 <navigator url="/pages/detail/detail?id={{ firstId }}">
   <view class="hot-news">
     <image class="hot-news-image" src="{{firsthotImg}}"></image>
@@ -31,4 +32,7 @@
         </view>
      </view>
   </navigator>
+  </block>
+  <view class="no-data" wx:else> {{ message }} </view>
 </scroll-view>
+

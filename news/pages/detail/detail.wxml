@@ -1,5 +1,5 @@
 <!--pages/detail/detail.wxml-->
-<view class="news-info" scroll-y>
+<view wx:if="{{ noData }}" class="news-info" scroll-y>
   <view class="news-title">{{ title }}</view>
   <view class="news-remarks">
     <text class="news-source {{source == ''? 'm-r-0':'m-r-20'}}">{{source}}</text>
@@ -12,7 +12,8 @@
       <text>{{item.text}}</text>
     </view>
     <view wx:if="{{item.type == 'image' }}" class="news-img-con">
-      <image class="news-img" src="{{item.src}}"></image>
+      <image class="news-img" src="{{item.src || defaultImage}}"></image>
     </view>
   </view>
 </view>
+<view class="no-data" wx:else> {{ message }} </view>
