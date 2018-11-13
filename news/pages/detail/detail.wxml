@@ -6,8 +6,8 @@
     <text class="news-date">{{date}}</text>
     <text class="pull-right">阅读 {{ readCount }}</text>
   </view>
-  <block wx:for="{{ content }}" wx:key="id">
-    <view class="news-text">
+  <view class="news-text">
+    <block wx:for="{{ content }}" wx:key="id">
       <view wx:if="{{item.type == 'strong' }}" class="news-strong">{{item.text}}</view>
       <view wx:if="{{item.type == 'p' }}" class="news-p">
         <text>{{item.text}}</text>
@@ -15,7 +15,7 @@
       <view wx:if="{{item.type == 'image' }}" class="news-img-con">
         <image class="news-img" src="{{item.src || defaultImage}}"></image>
       </view>
-    </view>
-  </block>
+    </block>
+  </view>
 </view>
 <view class="no-data" wx:else> {{ message }} </view>
